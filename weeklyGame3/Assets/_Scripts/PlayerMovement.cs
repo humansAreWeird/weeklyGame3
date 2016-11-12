@@ -28,17 +28,15 @@ public class PlayerMovement : MonoBehaviour {
             jump = jumpSpeed;
             isJumping = true;
         }
-
-    movement = new Vector3(horizontalMovement, jump, verticalMovement);
-
     if (isJumping)
         movement /= 2;
+
+    movement = new Vector3(horizontalMovement, jump, verticalMovement);
     }
 
     void FixedUpdate()
     {
         rb.AddForce(movement * speed * Time.deltaTime * 60);
-
     }
 
     void OnTriggerStay(Collider other)
