@@ -13,13 +13,17 @@ public class PlayerMovement : MonoBehaviour {
     private float verticalMovement;
     private float jump = 0f;
     bool isJumping = false;
+    public Transform playerCameraTranform;
 
 	void Start () {
         rb = GetComponent<Rigidbody>();
+//        playerCamera = GetComponent<Transform>();
 	}
 
     void Update () {
-    horizontalMovement = Input.GetAxis("Horizontal");
+        Quaternion.
+
+        horizontalMovement = Input.GetAxis("Horizontal");
     verticalMovement = Input.GetAxis("Vertical");
     jump = 0f;
 
