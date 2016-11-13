@@ -4,6 +4,7 @@ using System.Collections;
 public class PlayerCamera : MonoBehaviour {
 
     public float cameraSpeed = 1f;
+    public float jawRange = 3f;
 
     private float jaw;
     private float pitch;
@@ -11,20 +12,13 @@ public class PlayerCamera : MonoBehaviour {
 
     private Rigidbody playerRigidBody;
 
-
-	void Start () {
-
-	}
-	
-
 	void Update () {
-
         pitch = Input.mousePosition.x;
         jaw  = Input.mousePosition.y;
-        mouseMovement = new Vector3(jaw, pitch, 0f);
+        mouseMovement = new Vector3(-jaw / jawRange, pitch, 0f);
 	}
 
     void FixedUpdate() {
-       gameObject.transform.rotation = Quaternion.Slerp(gameObject.transform.rotation, Quaternion.Euler(mouseMovement), Time.deltaTime * cameraSpeed);
+        gameObject.transform.rotation = Quaternion.Euler(mouseMovement);
     }
 }
