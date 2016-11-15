@@ -10,11 +10,16 @@ public class PlayerMovement : MonoBehaviour {
 
     private Rigidbody rb;
     private Vector3 movement;
+    private float mouseY;
+    private float mouseX;
     private Vector3 mouseMovement;
     private float horizontalMovement;
     private float verticalMovement;
     private float jump = 0f;
     private bool isJumping = false;
+    private RaycastHit hit;
+
+ 
 
 	void Start () {
         rb = GetComponent<Rigidbody>();
@@ -22,8 +27,9 @@ public class PlayerMovement : MonoBehaviour {
 
     void Update () {
 
-    horizontalMovement = Input.GetAxis("Horizontal");
-    verticalMovement = Input.GetAxis("Vertical");
+        horizontalMovement = Input.GetAxis("Horizontal");
+        verticalMovement = Input.GetAxis("Vertical");
+
 
         if (isJumping)
         {
@@ -40,7 +46,9 @@ public class PlayerMovement : MonoBehaviour {
 
 
         movement = new Vector3(horizontalMovement, jump, verticalMovement);
-    
+
+
+
         mouseMovement = new Vector3(0f, Input.mousePosition.x, 0f);
     }
 
