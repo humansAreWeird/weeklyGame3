@@ -5,6 +5,7 @@ public class PlayerCamera : MonoBehaviour {
 
     public float cameraSpeed = 1f;
     public float jawRange = 3f;
+    public Vector3 fwd;
 
     private float jaw;
     private float pitch;
@@ -13,22 +14,20 @@ public class PlayerCamera : MonoBehaviour {
     private Rigidbody playerRigidBody;
 
 	void Update () {
-        pitch = Input.mousePosition.x;
-        jaw  = Input.mousePosition.y;
-        mouseMovement = new Vector3((-jaw / jawRange) + 75, pitch, 0f);
-
-        Vector3 fwd = transform.TransformDirection(Vector3.forward);
-
-        if (Input.GetButtonDown("Fire1"))
-        {
-            if (Physics.Raycast(transform.position, fwd, 10))
-            {
-                print("object detected");
-            }
-        }
+        cameraMovement();
     }
 
     void FixedUpdate() {
         gameObject.transform.rotation = Quaternion.Euler(mouseMovement);
+
+
     }
+
+    void cameraMovement()
+    {
+        pitch = Input.mousePosition.x;
+        jaw = Input.mousePosition.y;
+        mouseMovement = new Vector3((-jaw / jawRange) + 75, pitch, 0f);
+    }
+
 }
