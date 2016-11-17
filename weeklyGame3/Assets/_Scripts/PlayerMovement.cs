@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour {
     public float speed = 5f;
     public float jumpSpeed = 5;
     public float fall = 1f;
+    public float hookForse = 500f;
 
     private Rigidbody rb;
     private Vector3 movement;
@@ -47,8 +48,6 @@ public class PlayerMovement : MonoBehaviour {
         horizontalMovement = Input.GetAxis("Horizontal");
         verticalMovement = Input.GetAxis("Vertical");
 
-
-
         movement = new Vector3(horizontalMovement, jump, verticalMovement);
         mouseMovement = new Vector3(0f, Input.mousePosition.x, 0f);
     }
@@ -72,16 +71,13 @@ public class PlayerMovement : MonoBehaviour {
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            fwd = transform.TransformDirection(Vector3.forward);
-            if (Physics.Raycast(transform.position, fwd,out hit, 10))
+            fwd =  playerCamera.transform.TransformDirection(Vector3.forward);
+            if (Physics.Raycast(playerCamera.transform.position, fwd,out hit, 50))
             {
-                //if (hit.collider.CompareTag("Floor"))
-                //{
-                //    print(fwd);
-                //    rb.AddForce(fwd * 1000);
-                //}
-
-                print("1");
+                if (hit.collider.CompareTag("Floor"))
+                {
+                    rb.AddForce(fwd * hookForse * 100);
+                }
             }
         }
 
